@@ -4,29 +4,70 @@
  */
 package card;
 
-/**
- * A class that fills a magic hand of 7 cards with random Card Objects
- * and then asks the user to pick a card and searches the array of cards
- * for the match to the user's card. To be used as starting code in ICE 1
- * @author srinivsi
- */
+
+import java.util.Random;
+import java.util.Scanner;
+
 public class CardTrick {
+    public static void main(String[] args) {
+        String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
+        Card[] hand = new Card[7];  
+
     
-    public static void main(String[] args)
-    {
-        Card[] magicHand = new Card[7];
-        
-        for (int i=0; i<magicHand.length; i++)
-        {
-            Card c = new Card();
-            //c.setValue(insert call to random number generator here)
-            //c.setSuit(Card.SUITS[insert call to random number between 0-3 here])
+        Random random = new Random();
+        for (int i = 0; i < hand.length; i++) {
+            int number = random.nextInt(13) + 1; 
+            String suit = suits[random.nextInt(4)];  
+            hand[i] = new Card(number, suit);  
         }
-        
-        //insert code to ask the user for Card value and suit, create their card
-        // and search magicHand here
-        //Then report the result here
-        // add one luckcard hard code 2,clubs
-    }
+
+     
+        System.out.println("Your hand of cards:");
+        for (Card card : hand) {
+            System.out.println(card);
+        }
+
+     
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Pick a card number (1-13): ");
+        int userNumber = scanner.nextInt();
+        System.out.print("Pick a suit (Hearts, Diamonds, Clubs, Spades): ");
+        String userSuit = scanner.next();
+
     
+        boolean userCardFound = false;
+        for (Card card : hand) {
+            if (card.getNumber() == userNumber && card.getSuit().equalsIgnoreCase(userSuit)) {
+                userCardFound = true;
+                break;
+            }
+        }
+
+   
+        if (userCardFound) {
+            System.out.println("Your card is in the hand!");
+        } else {
+            System.out.println("Your card is not in the hand.");
+        }
+
+        
+        Card luckyCard = new Card(7, "Hearts");  // Hard-coded card
+
+        
+        boolean luckyCardFound = false;
+        for (Card card : hand) {
+            if (card.getNumber() == luckyCard.getNumber() && card.getSuit().equals(luckyCard.getSuit())) {
+                luckyCardFound = true;
+                break;
+            }
+        }
+
+      
+        if (luckyCardFound) {
+            System.out.println("You win! The lucky card is in the hand.");
+        } else {
+            System.out.println("Sorry, you lose. The lucky card is not in the hand.");
+        }
+    }
 }
+
