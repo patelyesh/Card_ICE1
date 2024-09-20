@@ -51,23 +51,7 @@ public class CardTrick {
         }
 
         
-        Card luckyCard = new Card(7, "Hearts");  // Hard-coded card
-
-        
-        boolean luckyCardFound = false;
-        for (Card card : hand) {
-            if (card.getNumber() == luckyCard.getNumber() && card.getSuit().equals(luckyCard.getSuit())) {
-                luckyCardFound = true;
-                break;
-            }
-        }
-
-      
-        if (luckyCardFound) {
-            System.out.println("You win! The lucky card is in the hand.");
-        } else {
-            System.out.println("Sorry, you lose. The lucky card is not in the hand.");
-        }
+       
     }
 }
 
